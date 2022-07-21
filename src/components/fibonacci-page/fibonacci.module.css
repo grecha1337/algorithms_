@@ -1,0 +1,25 @@
+.wrapperForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 120px;
+}
+ 
+
+.wrapperInput{
+  width: 377px;
+}
+ 
+.content {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+}
+
+.warpperCircle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 48px 16px;
+}
