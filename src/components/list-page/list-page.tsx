@@ -380,15 +380,22 @@ export const ListPage: React.FC = () => {
             }}
           />
           <Button text="Добавить по индексу"
-            disabled={isLoading || (array && Number(inputIndex) > array.length) || (!inputIndex || !inputValue)}
+            disabled={isLoading
+              || (array && Number(inputIndex) > array.length - 1)
+              || (!inputIndex || !inputValue)}
             extraClass={styles.addByIndex}
-            isLoader={typeOperation === TypeOperation.ADD_BY_INDEX_INSERT || typeOperation === TypeOperation.ADD_BY_INDEX_SEARCH}
+            isLoader={typeOperation === TypeOperation.ADD_BY_INDEX_INSERT
+              || typeOperation === TypeOperation.ADD_BY_INDEX_SEARCH}
             onClick={handlerAddByIndex}
           />
           <Button text="Удалить по индексу"
-            disabled={isLoading || (array && Number(inputIndex) > array.length) || !array.length}
+            disabled={isLoading 
+              || !inputIndex
+              || (array && Number(inputIndex) > array.length - 1)
+              || !array.length}
             extraClass={styles.deleteByIndex}
-            isLoader={typeOperation === TypeOperation.DELETE_BY_INDEX_REMOVE || typeOperation === TypeOperation.DELETE_BY_INDEX_SEARCH}
+            isLoader={typeOperation === TypeOperation.DELETE_BY_INDEX_REMOVE
+              || typeOperation === TypeOperation.DELETE_BY_INDEX_SEARCH}
             onClick={handlerDeleteByIndex}
           />
 

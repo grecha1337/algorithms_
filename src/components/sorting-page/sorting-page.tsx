@@ -24,6 +24,10 @@ export const SortingPage: React.FC = () => {
   const interval = useRef<null | NodeJS.Timeout>(null);
 
   useEffect(() => {
+    setDefaultArray();
+  }, [])
+
+  useEffect(() => {
     if (
       algorithmSteps.length > 0
       && currentAlgorithmStep < algorithmSteps.length - 1
@@ -59,7 +63,7 @@ export const SortingPage: React.FC = () => {
     setCurrentAlgorithmStep(1)
   }
 
-  const handlerButtonGenArray = () => {
+  const setDefaultArray = () => {
     const array = generationArray(0, 100, 3, 17)
     setCurrentAlgorithmStep(0)
     const res: Item[][] = [[]]
@@ -68,6 +72,10 @@ export const SortingPage: React.FC = () => {
     }
     setArray(array);
     setAlgorithmSteps(res)
+  }
+
+  const handlerButtonGenArray = () => {
+    setDefaultArray()
   }
 
   return (

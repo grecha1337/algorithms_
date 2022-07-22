@@ -56,16 +56,27 @@ export const FibonacciPage: React.FC = () => {
     <SolutionLayout title="Последовательность Фибоначчи">
       <div className={styles.wrapperForm}>
         <div className={`mr-4 ${styles.wrapperInput}`}>
-          <Input onChange={handlerInput} value={value} disabled={loading} max={19} type="number" isLimitText={true} />
+          <Input onChange={handlerInput}
+            value={value}
+            disabled={loading}
+            max={19}
+            type="number"
+            isLimitText={true} />
         </div>
-        <Button text="Развернуть" onClick={handlerButton} isLoader={loading} />
+        <Button text="Развернуть"
+         onClick={handlerButton} 
+         isLoader={loading}
+         disabled={!value} />
       </div>
       <div className={styles.content}>
         <div className={styles.warpperCircle}>
           {algorithmSteps.length > 0 &&
             algorithmSteps.slice(0, currentAlgorithmStep + 1).map((element, index) => {
               return (
-                <Circle letter={element.toString()} key={index} state={ElementStates.Default} index={index} />
+                <Circle letter={element.toString()}
+                  key={index}
+                  state={ElementStates.Default}
+                  index={index} />
               );
             })
           }

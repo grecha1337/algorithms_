@@ -51,9 +51,16 @@ export const StringComponent: React.FC = () => {
     <SolutionLayout title="Строка">
       <div className={styles.wrapperForm}>
         <div className={`mr-4 ${styles.wrapperInput}`}>
-          <Input maxLength={11} isLimitText={true} onChange={handlerInput} value={value} disabled={loading} />
+          <Input maxLength={11}
+            isLimitText={true}
+            onChange={handlerInput}
+            value={value}
+            disabled={loading} />
         </div>
-        <Button text="Развернуть" onClick={handlerButton} isLoader={loading} />
+        <Button text="Развернуть"
+          onClick={handlerButton}
+          isLoader={loading}
+          disabled={!value} />
       </div>
       <div className={styles.wrapperCircle}>
         {algorithmSteps?.length > 0 &&
