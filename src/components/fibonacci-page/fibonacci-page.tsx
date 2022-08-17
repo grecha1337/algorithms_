@@ -61,12 +61,15 @@ export const FibonacciPage: React.FC = () => {
             disabled={loading}
             max={19}
             type="number"
-            isLimitText={true} />
+            isLimitText={true}
+            data-testid={"input-fibonacci"} />
         </div>
         <Button text="Развернуть"
          onClick={handlerButton} 
          isLoader={loading}
-         disabled={!value} />
+         disabled={!value} 
+         data-testid={"button-fibonacci"}
+         />
       </div>
       <div className={styles.content}>
         <div className={styles.warpperCircle}>

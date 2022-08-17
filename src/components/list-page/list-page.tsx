@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LinkedList } from "../../data-structures/linled-list";
 import { ElementStates } from "../../types/element-states";
 import { CircleWithArrow, ElementStatesArrow } from "../circle-with-arrow/circlew-with-arrow";
@@ -7,7 +7,7 @@ import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import styles from "./list-page.module.css"
-
+import { MAX_LENGTH_LIST } from "../../constants/constant"
 
 export const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -49,7 +49,7 @@ export const ListPage: React.FC = () => {
   }
 
   useEffect(() => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < MAX_LENGTH_LIST; i++) {
       list.appendHead(Math.floor(Math.random() * (100 - 1) + 1));
     }
     setArray(list.toArray());
@@ -63,8 +63,9 @@ export const ListPage: React.FC = () => {
           setIsNewElement(true);
           setTypeOperation(TypeOperation.ADD_BY_INDEX_INSERT);
           setArray(list.toArray());
+        } else {
+          setCurrentIndex(prev => prev + 1)
         }
-        setCurrentIndex(prev => prev + 1)
       }, 1000)
     }
     return () => {
@@ -344,28 +345,37 @@ export const ListPage: React.FC = () => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();
               }
-            }} />
+            }}
+            data-testid="list-input-value"
+          />
           <Button text="Добавить в head"
             disabled={isLoading || !inputValue}
             extraClass={styles.buttonAdd}
             isLoader={typeOperation === TypeOperation.ADD_HEAD}
             onClick={handlerAddHead}
+            data-testid="list-button-add-head"
           />
           <Button text="Добавить в tail"
             disabled={isLoading || !inputValue}
             extraClass={styles.buttonDelete}
             isLoader={typeOperation === TypeOperation.ADD_TAIL}
-            onClick={handlerAddTail} />
+            onClick={handlerAddTail}
+            data-testid="list-button-add-tail"
+          />
           <Button text="Удалить из head"
             disabled={isLoading || !array.length}
             extraClass={styles.buttonDelete}
             isLoader={typeOperation === TypeOperation.DELETE_HEAD}
-            onClick={handlerDeleteHead} />
+            onClick={handlerDeleteHead}
+            data-testid="list-button-delete-head"
+          />
           <Button text="Удалить из tail"
             disabled={isLoading || !array.length}
             extraClass={styles.buttonDelete}
             isLoader={typeOperation === TypeOperation.DELETE_TAIL}
-            onClick={handlerDeleteTail} />
+            onClick={handlerDeleteTail}
+            data-testid="list-button-delete-tail"
+          />
           <Input maxLength={4}
             max={19}
             type="number"
@@ -378,6 +388,7 @@ export const ListPage: React.FC = () => {
                 event.preventDefault();
               }
             }}
+            data-testid="list-input-index"
           />
           <Button text="Добавить по индексу"
             disabled={isLoading
@@ -387,9 +398,10 @@ export const ListPage: React.FC = () => {
             isLoader={typeOperation === TypeOperation.ADD_BY_INDEX_INSERT
               || typeOperation === TypeOperation.ADD_BY_INDEX_SEARCH}
             onClick={handlerAddByIndex}
+            data-testid="list-button-add-by-index"
           />
           <Button text="Удалить по индексу"
-            disabled={isLoading 
+            disabled={isLoading
               || !inputIndex
               || (array && Number(inputIndex) > array.length - 1)
               || !array.length}
@@ -397,6 +409,7 @@ export const ListPage: React.FC = () => {
             isLoader={typeOperation === TypeOperation.DELETE_BY_INDEX_REMOVE
               || typeOperation === TypeOperation.DELETE_BY_INDEX_SEARCH}
             onClick={handlerDeleteByIndex}
+            data-testid="list-button-delete-by-index"
           />
 
         </div>
