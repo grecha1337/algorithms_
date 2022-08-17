@@ -18,13 +18,21 @@ export const selectionSortStep = (arr: number[] | null, orderBy: OrderBy): Item[
   if (!arr) {
     return [[]]
   }
-
   const { length } = arr;
   const res: Array<Array<Item>> = [[]];
   let tmp: Array<Item> = [];
   let tmp1: Array<Item> = [];
   for (let i = 0; i < length; i++) {
     res[0][i] = { value: arr[i], state: ElementStates.Default };
+
+    //если массив из 1 элемента
+    if (length === 1) {
+      res[1] = []
+      res[1][i] = { value: arr[i], state: ElementStates.Changing };
+      res[2] = []
+      res[2][i] = { value: arr[i], state: ElementStates.Modified };
+      return res
+    }
   }
 
   for (let i = 0, level = 1; i < length; i++) {
@@ -39,7 +47,6 @@ export const selectionSortStep = (arr: number[] | null, orderBy: OrderBy): Item[
 
     for (let j = i + 1; j < length; j++, level++) {
       res[level][j] = { value: arr[j], state: ElementStates.Changing };
-
       if (orderBy === OrderBy.ASC) {
         if (arr[index] > arr[j]) {
           index = j;
@@ -68,6 +75,14 @@ export const bubbleSortSteps = (arr: number[], orderBy: OrderBy = OrderBy.ASC) =
   let tmp = []
   for (let i = 0; i < length; i++) {
     res[0][i] = { value: arr[i], state: ElementStates.Default };
+    //если массив из 1 элемента
+    if (length === 1) {
+      res[1] = []
+      res[1][i] = { value: arr[i], state: ElementStates.Changing };
+      res[2] = []
+      res[2][i] = { value: arr[i], state: ElementStates.Modified };
+      return res
+    }
   }
   for (let i = 0, level = 1; i < length; i++) {
     if (!res[level]) {
@@ -92,14 +107,11 @@ export const bubbleSortSteps = (arr: number[], orderBy: OrderBy = OrderBy.ASC) =
       res[level][j + 1] = { value: arr[j + 1], state: ElementStates.Changing };
       res[level + 1] = [...tmp];
 
-      if (j + 1 === length - i - 1) {
-        if (i === length - 2) {
-          res[level + 1][j] = { value: arr[j], state: ElementStates.Modified };
-          res[level + 1][j + 1] = { value: arr[j + 1], state: ElementStates.Modified };
-        } else {
-          res[level + 1][j + 1] = { value: arr[j + 1], state: ElementStates.Modified };
-        }
-
+      if (i === length - 2) {
+        res[level + 1][j] = { value: arr[j], state: ElementStates.Modified };
+        res[level + 1][j + 1] = { value: arr[j + 1], state: ElementStates.Modified };
+      } else {
+        res[level + 1][j + 1] = { value: arr[j + 1], state: ElementStates.Modified };
       }
     }
   }

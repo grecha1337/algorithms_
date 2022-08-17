@@ -95,21 +95,29 @@ export const StackPage: React.FC = () => {
             onChange={handlerInput}
             value={value}
             disabled={loading}
-            extraClass={styles.input} />
+            extraClass={styles.input}
+            data-testid={"input-stack"}
+          />
           <Button text="Добавить"
             disabled={loading || !value}
             extraClass={styles.buttonAdd}
             onClick={handlerAddElement}
-            isLoader={typOperation === TypeOperation.ADD} />
+            isLoader={typOperation === TypeOperation.ADD}
+            data-testid={"button-stack-add"}
+          />
           <Button text="Удалить"
             disabled={loading || stack.isEmpty()}
             extraClass={styles.buttonDelete}
             onClick={handlerDelete}
-            isLoader={typOperation === TypeOperation.DELETE} />
+            isLoader={typOperation === TypeOperation.DELETE}
+            data-testid={"button-stack-delete"}
+          />
           <Button text="Очистить"
             disabled={loading}
             extraClass={styles.buttonDelete}
-            onClick={handlerClear} />
+            onClick={handlerClear}
+            data-testid={"button-stack-clear"}
+          />
 
         </div>
         <div className={styles.contentStack}>
