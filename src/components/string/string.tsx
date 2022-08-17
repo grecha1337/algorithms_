@@ -55,12 +55,16 @@ export const StringComponent: React.FC = () => {
             isLimitText={true}
             onChange={handlerInput}
             value={value}
-            disabled={loading} />
+            disabled={loading}
+            data-testid={"input-revers"}
+          />
         </div>
         <Button text="Развернуть"
           onClick={handlerButton}
           isLoader={loading}
-          disabled={!value} />
+          disabled={!value}
+          data-testid={"button-revers"}
+        />
       </div>
       <div className={styles.wrapperCircle}>
         {algorithmSteps?.length > 0 &&

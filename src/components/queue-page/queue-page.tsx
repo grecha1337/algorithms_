@@ -129,21 +129,29 @@ export const QueuePage: React.FC = () => {
             isLimitText={true}
             onChange={handlerInput}
             value={value}
-            extraClass={styles.input} />
+            extraClass={styles.input}
+            data-testid={"input-queue"}
+          />
           <Button text="Добавить"
             disabled={loading || !value}
             extraClass={styles.buttonAdd}
             onClick={handlerAddElement}
-            isLoader={typOperation === TypeOperation.ADD} />
+            isLoader={typOperation === TypeOperation.ADD}
+            data-testid={"button-queue-add"}
+          />
           <Button text="Удалить"
             disabled={loading || (queue.isEmpty())}
             extraClass={styles.buttonDelete}
             onClick={handlerDelete}
-            isLoader={typOperation === TypeOperation.DELETE} />
+            isLoader={typOperation === TypeOperation.DELETE}
+            data-testid={"button-queue-delete"}
+          />
           <Button text="Очистить"
             disabled={loading}
             extraClass={styles.buttonDelete}
-            onClick={handlerClear} />
+            onClick={handlerClear}
+            data-testid={"button-queue-clear"}
+          />
 
         </div>
         <div className={styles.contentQueue}>
